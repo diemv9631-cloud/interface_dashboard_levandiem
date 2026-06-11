@@ -151,13 +151,15 @@ if search_query != "":
             fig_v.update_layout(height=350, margin=dict(t=0,b=0,l=0,r=0), legend_title="")
             st.plotly_chart(fig_v, use_container_width=True)
             
-        # ROW 3: BẢNG SỐ LIỆU THẬT
+        # ROW 3: BẢNG SỐ LIỆU ĐẶC TRƯNG K-MEANS
         st.markdown("---")
         r3c1, r3c2 = st.columns(2)
         with r3c1:
-            st.markdown("**Trích xuất đặc trưng Động lực học**")
-            df_feat = pd.DataFrame({'Thông số': ['Thời gian', 'Quãng đường (S)', 'Vận tốc TB (V_tb)', 'Năng lượng tuyệt đối (EC_Wh)', 'Tiền sạc điện'], 
-                                    'Giá trị': ["60 Giây", f"{row['S_km']:.4f} km", f"{row['V_tb_kmh']:.2f} km/h", f"{row['EC_Wh']:.3f} Wh", f"{row['Tien_Dien_VND']:.1f} VNĐ"]})
+            st.markdown("**Trích xuất Bộ đặc trưng Động lực học (K-means)**")
+            df_feat = pd.DataFrame({
+                'Thông số': ['Thời gian phân đoạn', 'Quãng đường (S)', 'Vận tốc TB (Mean_V)', 'Gia tốc Max (Max_A)', 'Công suất (Mean_VSP)', 'Năng lượng (EC)'], 
+                'Giá trị': ["60 Giây", f"{row['S_km']:.4f} km", f"{row['V_tb_kmh']:.2f} km/h", f"{row['Max_A']:.2f} m/s²", f"{row['Mean_VSP']:.1f} kW", f"{row['EC_Wh']:.2f} Wh"]
+            })
             st.dataframe(df_feat, use_container_width=True)
         with r3c2:
             st.markdown("**Quy đổi Bài toán Kinh tế (TCO)**")
